@@ -127,18 +127,17 @@ def main(win, size):
     end = None
 
     while run:        
+        draw(win, grid, ROWS, size)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
 
-            if started:
-                continue
 
             pos = pygame.mouse.get_pos()
             row, col = get_clicked_position(pos, ROWS, size)
             node = grid[row][col]
 
-            if pygame.mouse.get_pressed()[0]: #LEFT
+            if not started and pygame.mouse.get_pressed()[0]: #LEFT
                 if node.color != BLACK and node != end and not start:
                     start = node
                     node.make_start()
@@ -157,14 +156,20 @@ def main(win, size):
                 node.reset()
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE and not started:
+                if not started and event.key == pygame.K_SPACE and start and end:
                     started = True
-                    # run the algorithm.
                     for row in grid:
                         for node in row:
                             node.update_neighbors(grid)
 
                     algorithm(lambda: draw(win, grid, ROWS, size), grid, start, end)
+                else:
+                    start = None
+                    end = None
+                    started = False
+                    grid = make_grid(ROWS, size)
+                
+
 
 
         draw(win, grid, ROWS, size)
