@@ -49,3 +49,10 @@ def draw(win, grid, rows, size):
     draw_grid(win, rows, size)
     pygame.display.update()
 
+def get_clicked_position(mouse_pos, rows, size):
+    rect_size = size // rows
+    y, x = mouse_pos
+    row = y // rect_size
+    col = x // rect_size
+    
+    return row, col
