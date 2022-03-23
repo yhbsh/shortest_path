@@ -53,8 +53,7 @@ class Node:
         self.color = PURPLE
 
     def draw(self, win):
-        pygame.draw.rect(
-            win, self.color, (self.x, self.y, self.size, self.width))
+        pygame.draw.rect(win, self.color, (self.x, self.y, self.size, self.size))
 
     def update_neighbors(self, grid):
         pass
