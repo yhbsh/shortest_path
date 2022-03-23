@@ -59,16 +59,17 @@ def get_clicked_position(mouse_pos, rows, size):
 
 
 def main(win, size):
-    ROWS = 20
+    ROWS = 15
 
     grid = make_grid(ROWS, size)
-    start = None
-    end = None
+
 
     run = True
     started = False
+    start = None
+    end = None
 
-    while run:
+    while run:        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -76,25 +77,32 @@ def main(win, size):
             if started:
                 continue
 
+            pos = pygame.mouse.get_pos()
+            row, col = get_clicked_position(pos, ROWS, size)
+            node = grid[row][col]
+
             if pygame.mouse.get_pressed()[0]: #LEFT
-                pos = pygame.mouse.get_pos()
-                row, col = get_clicked_position(pos, ROWS, size)
-                node = grid[row][col]
-                if not start:
+                if node.color != BLACK and node != end and not start:
                     start = node
-                    start.make_start()
-                elif not end:
+                    node.make_start()
+                elif node.color != BLACK and node != start and not end:
                     end = node
-                    end.make_end()
+                    node.make_end()
 
                 elif node != start and node != end:
                     node.make_barrier()
 
             elif pygame.mouse.get_pressed()[2]: #RIGHT
-                pass
+                if node == start:
+                    start = None
+                elif node == end:
+                    end = None
+                node.reset()
 
-                
+               
+
         draw(win, grid, ROWS, size)
+                
 
     pygame.quit()
 
