@@ -1,6 +1,5 @@
-from turtle import left
 import pygame
-from constants import *
+from src.constants import *
 
 
 class Node:
