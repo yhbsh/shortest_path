@@ -99,6 +99,15 @@ def main(win, size):
                     end = None
                 node.reset()
 
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE and not started:
+                    started = True
+                    # run the algorithm.
+                    for row in grid:
+                        for node in row:
+                            node.update_neighbors()
+
+                    # algorithm(lambda: draw(win, grid, ROWS, size), grid, start, end)
                
 
         draw(win, grid, ROWS, size)
@@ -107,4 +116,4 @@ def main(win, size):
     pygame.quit()
 
 
-main(WIN, SIZE)
+# main(WIN, SIZE)

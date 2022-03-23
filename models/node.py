@@ -1,3 +1,4 @@
+from turtle import left
 import pygame
 from constants import *
 
@@ -9,7 +10,7 @@ class Node:
         self.x = row * size
         self.y = col * size
         self.color = WHITE
-        self.neightbors = []
+        self.neighbors = []
         self.size = size
         self.total_rows = total_rows
 
@@ -56,7 +57,23 @@ class Node:
         pygame.draw.rect(win, self.color, (self.x, self.y, self.size, self.size))
 
     def update_neighbors(self, grid):
-        pass
+        self.neighbors = []
+        top_neighbor = grid[self.row-1][self.col].is_barrier()
+        down_neighbor = grid[self.row+1][self.col].is_barrier()
+        right_neighbor = grid[self.row][self.col+1].is_barrier()
+        left_neighbor = grid[self.row][self.col-1].is_barrier()
+        if self.row > 0 and not top_neighbor.is_barrier():
+            self.neighbors.append(top_neighbor)
+
+        if self.row - 1 < self.total_rows and not down_neighbor.is_barrier():
+            self.neighbors.append(down_neighbor)
+
+        if self.col > 0 and not left_neighbor.is_barrier():
+            self.neighbors.append(left_neighbor)
+        
+        if self.col - 1 < self.total_rows and not right_neighbor.is_barrier():
+            self.neighbors.append(right_neighbor)
+
 
         # Used to compare current node with "other node"
         # we always say that other node is greater than current node.
