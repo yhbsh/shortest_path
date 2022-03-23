@@ -1,7 +1,7 @@
 import pygame
 
 
-SIZE = 800
+SIZE = 600
 WIN = pygame.display.set_mode((SIZE, SIZE))
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
