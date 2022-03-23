@@ -58,21 +58,21 @@ class Node:
 
     def update_neighbors(self, grid):
         self.neighbors = []
-        top_neighbor = grid[self.row-1][self.col].is_barrier()
-        down_neighbor = grid[self.row+1][self.col].is_barrier()
-        right_neighbor = grid[self.row][self.col+1].is_barrier()
-        left_neighbor = grid[self.row][self.col-1].is_barrier()
-        if self.row > 0 and not top_neighbor.is_barrier():
-            self.neighbors.append(top_neighbor)
+        # top_neighbor = grid[self.row-1][self.col] if self.row > 0 else None
+        # down_neighbor = grid[self.row+1][self.col] if self.row - 1 < self.total_rows else None 
+        # right_neighbor = grid[self.row][self.col+1] if self.col < self.total_rows else None
+        # left_neighbor = grid[self.row][self.col-1] if self.col > 0 else None
+        if self.row > 0 and not grid[self.row-1][self.col].is_barrier():
+            self.neighbors.append(grid[self.row-1][self.col])
 
-        if self.row - 1 < self.total_rows and not down_neighbor.is_barrier():
-            self.neighbors.append(down_neighbor)
+        if self.row + 1 < self.total_rows and not grid[self.row+1][self.col].is_barrier():
+            self.neighbors.append(grid[self.row+1][self.col])
 
-        if self.col > 0 and not left_neighbor.is_barrier():
-            self.neighbors.append(left_neighbor)
+        if self.col > 0 and not grid[self.row][self.col-1].is_barrier():
+            self.neighbors.append(grid[self.row][self.col-1])
         
-        if self.col - 1 < self.total_rows and not right_neighbor.is_barrier():
-            self.neighbors.append(right_neighbor)
+        if self.col + 1 < self.total_rows and not grid[self.row][self.col+1].is_barrier():
+            self.neighbors.append(grid[self.row][self.col+1])
 
 
         # Used to compare current node with "other node"
