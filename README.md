@@ -1,7 +1,7 @@
 # How to run the program:
 
--   go to the dist folder
 -   run main.exe
+-   or if you have python type "python -m main.py" on windows and "python3 -m main.py" on linux
 
 # How to install the program On windows:
 
