@@ -65,7 +65,6 @@ def main(win, size):
                 
 
 
-
         draw(win, grid, ROWS, size)
                 
 

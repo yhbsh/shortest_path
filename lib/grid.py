@@ -2,6 +2,8 @@ import pygame
 from src.constants import *
 from models.node import *
 
+
+
 def make_grid(rows, size):
     grid = []
     # size is the total size (height and width) of the grid
@@ -24,6 +26,8 @@ def draw_grid(win, rows, size):
         for j in range(rows):
             pygame.draw.line(win, GREY, (j * rect_size, 0), (j * rect_size, size))
 
+
+
 def draw(win, grid, rows, size):
     win.fill(WHITE)
 
@@ -32,6 +36,7 @@ def draw(win, grid, rows, size):
             node.draw(win)
 
     draw_grid(win, rows, size)
+    win.blit(TEXTSURFACE,(20,20))
     pygame.display.update()
 
 def get_clicked_position(mouse_pos, rows, size):
